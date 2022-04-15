@@ -1,6 +1,40 @@
-import * as React from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 
-// Delete me
-export const Thing = () => {
-  return <div>the snozzberries taste like snozzberries</div>;
+export const useLocalStorage = (key: string, defaultValue: string) => {
+  return useStorage(window.localStorage, key, defaultValue);
+};
+
+export const useSessionStorage = (key: string, defaultValue: string) => {
+  return useStorage(window.sessionStorage, key, defaultValue);
+};
+
+const useStorage = (
+  storageObj: Storage,
+  key: string,
+  defaultValue: string
+): [
+  undefined | string,
+  Dispatch<SetStateAction<undefined | string>>,
+  () => void
+] => {
+  const [value, setValue] = useState<undefined | string>(
+    storageObj.getItem(key) ?? defaultValue
+  );
+
+  const remove = useCallback(() => {
+    storageObj.removeItem(key);
+    setValue(undefined);
+  }, [key, storageObj]);
+
+  useEffect(() => {
+    value && storageObj.setItem(key, value);
+  }, [key, value, storageObj]);
+
+  return [value, setValue, remove];
 };
