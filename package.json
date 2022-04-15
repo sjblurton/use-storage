@@ -33,7 +33,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "use-storage",
+  "name": "@sjblurton/use-storage",
   "author": "Simon Blurton",
   "module": "dist/use-storage.esm.js",
   "size-limit": [
