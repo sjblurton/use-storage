@@ -27,3 +27,9 @@ const [name, setName, removeName] = useSessionStorage("name", "foo")
 
 const [age, setAge, removeAge] = useLocalStorage("age", "40")
 ```
+
+### **Links**
+
+GitHub: https://github.com/sjblurton/use-storage
+<br/>
+NPM: https://www.npmjs.com/package/@sjblurton/use-storage
